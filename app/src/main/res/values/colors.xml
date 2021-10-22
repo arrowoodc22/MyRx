@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pink_main">#FFC0CB</color>
+    <color name="pink_background">#FCBACB</color>
+    <color name="pink_undertone">#FE7F9C</color>
+    <color name="coral_main">#FE7D6A</color>
+    <color name="coral_background">#FC8483</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

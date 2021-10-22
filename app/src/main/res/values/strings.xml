@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">MyRx</string>
+    <string name="title_home">Home</string>
+    <string name="title_add">Add</string>
+    <string name="title_manage">Manage</string>
+    <!--    This is the Home Fragment Information-->
+    <string name="text_home_welcome_message">Hello, new user! Your prescriptions are listed below.</string>
+    <string name="listed_prescriptions">Here will be your listed prescriptions!</string>
+    <!--    This is the Manage Fragment Information-->
+    <string name="add_person">Add Person</string>
+    <string name="manage_person">Manage Person</string>
+    <!--    This is the Search Fragment Information-->
+    <string name="enter_new_first_name">Enter New First Name</string>
+    <string name="new_information">Please Enter All Information for Creating a New Patient</string>
+    <string name="enter_new_last_name">Enter New Last Name</string>
+    <string name="medication_name">Medication Name</string>
+    <string name="medication_dosage">Medication Dosage</string>
+    <string-array name="dosage_type">
+        <item>Select a Dosage Type</item>
+        <item>mg</item>
+        <item>vial</item>
+        <item>tablets</item>
+        <item>oz</item>
+        <item>tsp</item>
+        <item>mcg</item>
+        <item>units</item>
+    </string-array>
+    <string name="enter_last_refill_date">Previous Refill Date</string>
+    <string name="medication_quantity">Medication Quantity</string>
+    <string name="add_medication">Add Medication</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="manage_person_screen">Here you will manage people listed on Home Page.</string>
+    <string name="medication_refills">Refill Amount</string>
+    <string name="medication_expiration">Expiration Date</string>
+    <string name="edit_medication">Edit Medication</string>
+    <string name="choose_a_medication_to_edit">Choose a Medication to Edit.</string>
+
+</resources>
