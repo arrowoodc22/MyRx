@@ -7,20 +7,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
-import com.example.MyRx.ui.manage.ManageFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.DialogFragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.MyRx.databinding.ActivityMainBinding;
-
-import PersonDBSchema.PersonBaseHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,9 +45,16 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+
         }
 
-        // Function to allow medications to be taken from
+    private String displayAddedMedicationtoHomePage() {
+        EditText med = findViewById(R.id.medicationName);
+        return "Medication, " + med.getText() + " added to Home Page.";
+    }
+
+    // Function to allow medications to be taken from
         // AddActivity & shows/formatted in Home Page.
     public void addMedicationToScrollView(View view) {
         EditText mName = findViewById(R.id.medicationName);
@@ -58,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
         mDosage.getText();
         EditText mQuantity = findViewById(R.id.medicationQuantity);
         mQuantity.getText();
-        EditText mRefill = findViewById(R.id.medicationRefillDate);
-        mRefill.getText();
 
         // dosageSpinner located in AddActivity
         dosageSpinner = findViewById(R.id.spinnerDosage);
@@ -70,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         dosageSpinner.setAdapter(adapter);
+
+        displayAddedMedicationtoHomePage();
     }
 
     // On Click for Manage Fragment that allows Add Person Button to
@@ -100,5 +105,33 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, EditActivity.class);
             startActivity(intent);
         });
+    }
+
+    public void selectAnExpirationDate(View view) {
+            DialogFragment newFragment = new DatePickerFragment();
+            newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    public void processDatePickerResultExpiration(int year, int month, int day) {
+        TextView dateTextView = findViewById(R.id.selectedDate);
+        String month_string = Integer.toString(month + 1);
+        String day_string = Integer.toString(day);
+        String year_string = Integer.toString(year);
+        String dateMessage = (" " + month_string + "/" + day_string + "/" + year_string);
+        dateTextView.setText(dateMessage);
+    }
+
+    public void selectAPreviousRefillDate(View view) {
+        DialogFragment newFragment2 = new DatePickerFragmentPrevious();
+        newFragment2.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    public void processDatePickerResultPrevious(int year, int month, int day) {
+        TextView dateTextView = findViewById(R.id.selectedRefillDate);
+        String month_string = Integer.toString(month + 1);
+        String day_string = Integer.toString(day);
+        String year_string = Integer.toString(year);
+        String dateMessage = (" " + month_string + "/" + day_string + "/" + year_string);
+        dateTextView.setText(dateMessage);
     }
 }

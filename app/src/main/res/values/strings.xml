@@ -31,9 +31,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="manage_person_screen">Here you will manage people listed on Home Page.</string>
-    <string name="medication_refills">Refill Amount</string>
+    <string name="medication_refills_remaining">Remaining Refills</string>
     <string name="medication_expiration">Expiration Date</string>
     <string name="edit_medication">Edit Medication</string>
     <string name="choose_a_medication_to_edit">Choose a Medication to Edit.</string>
+    <string name="displayed_expiration_date">Expiration Date</string>
+    <string name="displayed_prev_date">Previous Refill Date</string>
 
 </resources>
