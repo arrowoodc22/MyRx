@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -23,10 +24,12 @@ import com.example.MyRx.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    Button addButton;
+    Button addPersonButton;
     Button manageButton;
     Button editButton;
+    Button addMedicationButton;
     Spinner dosageSpinner;
+    private DBHandler dbHandler;
 
 
     @Override
@@ -46,7 +49,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-
+        // creating a new dbhandler class
+        // and passing our context to it.
+        dbHandler = new DBHandler(MainActivity.this);
         }
 
     private String displayAddedMedicationtoHomePage() {
@@ -74,16 +79,43 @@ public class MainActivity extends AppCompatActivity {
         // Apply the adapter to the spinner
         dosageSpinner.setAdapter(adapter);
 
-        displayAddedMedicationtoHomePage();
+        Button addMedicationButton = findViewById(R.id.addMedication);
+        addMedicationButton.setOnClickListener(viewMed -> {
+            displayAddedMedicationtoHomePage();
+        });
+
     }
 
     // On Click for Manage Fragment that allows Add Person Button to
     // launch New AddPerson Activity when clicked.
     public void addActivity(View view) {
-        addButton = findViewById(R.id.addPerson);
-        addButton.setOnClickListener(view1 -> {
+        addPersonButton = findViewById(R.id.addPerson);
+        addPersonButton.setOnClickListener(view1 -> {
             Intent intent = new Intent(MainActivity.this, AddPersonActivity.class);
             startActivity(intent);
+
+            // Insert code to be able to access AddPersonActivity information
+            EditText first = findViewById(R.id.firstName);
+            EditText last = findViewById(R.id.lastName);
+            String firstName = first.getText().toString();
+            String lastName = last.getText().toString();
+            EditText dateOfBirth = findViewById(R.id.dateOfBirth);
+            String dob = dateOfBirth.getText().toString();
+
+            if(firstName.isEmpty() && lastName.isEmpty() && dob.isEmpty()) {
+                Toast.makeText(MainActivity.this, "Please enter all data in addPerson in Manage tab.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // add a new person to SQLite Data and pass all values to it.
+            dbHandler.addNewPerson(firstName, lastName, dob);
+
+            // Send information to Home Page
+            String home = findViewById(R.id.text_home).toString();
+
+            // Below line will make the welcome message of Home Page display
+                // Hello, firstName your medications are listed below.
+            // home + ", " + firstName + " your medications are listed below.";
         });
     }
 

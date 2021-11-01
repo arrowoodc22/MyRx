@@ -4,15 +4,16 @@
     <string name="title_add">Add</string>
     <string name="title_manage">Manage</string>
     <!--    This is the Home Fragment Information-->
-    <string name="text_home_welcome_message">Hello, new user! Your prescriptions are listed below.</string>
+    <string name="text_home_part1">Hello</string>
+    <string name="text_home_part2">your medications are listed below.</string>
     <string name="listed_prescriptions">Here will be your listed prescriptions!</string>
     <!--    This is the Manage Fragment Information-->
     <string name="add_person">Add Person</string>
     <string name="manage_person">Manage Person</string>
     <!--    This is the Search Fragment Information-->
-    <string name="enter_new_first_name">Enter New First Name</string>
-    <string name="new_information">Please Enter All Information for Creating a New Patient</string>
-    <string name="enter_new_last_name">Enter New Last Name</string>
+    <string name="enter_first_name">Enter First Name</string>
+    <string name="enter_last_name">Enter Last Name</string>
+    <string name="new_information">Please Enter All Information to Create a New Person</string>
     <string name="medication_name">Medication Name</string>
     <string name="medication_dosage">Medication Dosage</string>
     <string-array name="dosage_type">
@@ -37,5 +38,6 @@
     <string name="choose_a_medication_to_edit">Choose a Medication to Edit.</string>
     <string name="displayed_expiration_date">Expiration Date</string>
     <string name="displayed_prev_date">Previous Refill Date</string>
+    <string name="enter_date_of_birth">Enter Date of Birth</string>
 
 </resources>
