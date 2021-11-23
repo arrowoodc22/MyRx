@@ -26,6 +26,18 @@
         <item>mcg</item>
         <item>units</item>
     </string-array>
+    <string-array name = "quantity_type">
+        <item>Select a Quantity Type</item>
+        <item>bottle</item>
+        <item>vial</item>
+        <item>tablets</item>
+    </string-array>
+    <string-array name="frequency_type">
+        <item>Select a Frequency Type</item>
+        <item>day</item>
+        <item>month</item>
+        <item>months</item>
+    </string-array>
     <string name="enter_last_refill_date">Previous Refill Date</string>
     <string name="medication_quantity">Medication Quantity</string>
     <string name="add_medication">Add Medication</string>
@@ -39,5 +51,7 @@
     <string name="displayed_expiration_date">Expiration Date</string>
     <string name="displayed_prev_date">Previous Refill Date</string>
     <string name="enter_date_of_birth">Enter Date of Birth</string>
+    <string name="medication_rx">Medication Rx</string>
+    <string name="medication_frequency">Enter Intake Frequency</string>
 
 </resources>

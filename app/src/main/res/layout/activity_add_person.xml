@@ -10,7 +10,7 @@
         android:id="@+id/addPersonGreeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="189dp"
+        android:layout_marginStart="150dp"
         android:layout_marginTop="57dp"
         android:layout_marginEnd="164dp"
         android:text="@string/new_information"
@@ -42,15 +42,55 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/firstName" />
 
-    <EditText
-        android:id="@+id/dateOfBirth"
+    <Button
+        android:id="@+id/addPersonToHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="@string/enter_date_of_birth"
-        android:inputType="date"
-        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="addPerson"
+        android:text="@string/add_person"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birthDate" />
+
+    <Button
+        android:id="@+id/birthDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_date_of_birth"
+        android:onClick="selectADateofBirth"
+        app:layout_constraintEnd_toEndOf="@+id/lastName"
+        app:layout_constraintStart_toStartOf="@+id/lastName"
         app:layout_constraintTop_toBottomOf="@+id/lastName" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="164dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addPersonToHome" />
+
+    <Button
+        android:id="@+id/query"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="273dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="44dp"
+        android:text="Query"
+        android:onClick="querySuccessful"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addPersonToHome" />
+
+    <TextView
+        android:id="@+id/selectedBirthDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/birthDate"
+        app:layout_constraintTop_toBottomOf="@+id/lastName" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,29 +17,45 @@
     <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <EditText
-        android:id="@+id/medicationName"
+        android:id="@+id/medicationRx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="120dp"
         android:ems="10"
-        android:hint="@string/medication_name"
-        android:inputType="textPersonName"
+        android:hint="@string/medication_rx"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <EditText
+        android:id="@+id/medicationName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="120dp"
+        android:ems="10"
+        android:hint="@string/medication_name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicationRx" />
+
     <EditText
         android:id="@+id/medicationDosage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="120dp"
         android:ems="10"
         android:hint="@string/medication_dosage"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicationName" />
 
@@ -47,14 +63,28 @@
         android:id="@+id/medicationQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="120dp"
         android:ems="10"
         android:hint="@string/medication_quantity"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.567"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicationDosage" />
+
+    <Spinner
+        android:id="@+id/spinnerFrequency"
+        style="@style/Widget.AppCompat.Light.Spinner.DropDown.ActionBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="92dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/medicationFrequency"
+        app:layout_constraintTop_toTopOf="@+id/medicationFrequency" />
 
     <Spinner
         android:id="@+id/spinnerDosage"
@@ -68,64 +98,90 @@
         app:layout_constraintStart_toEndOf="@+id/medicationDosage"
         app:layout_constraintTop_toTopOf="@+id/medicationDosage" />
 
+    <Spinner
+        android:id="@+id/spinnerQuantity"
+        style="@style/Widget.AppCompat.Light.Spinner.DropDown.ActionBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/medicationQuantity"
+        app:layout_constraintTop_toTopOf="@+id/medicationQuantity" />
+
     <Button
         android:id="@+id/previousRefillDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/enter_last_refill_date"
         android:onClick="selectAPreviousRefillDate"
-        app:layout_constraintEnd_toEndOf="@+id/medicationQuantity"
-        app:layout_constraintStart_toStartOf="@+id/medicationQuantity"
-        app:layout_constraintTop_toBottomOf="@+id/medicationQuantity" />
+        android:text="@string/enter_last_refill_date"
+        app:layout_constraintEnd_toEndOf="@+id/medicationFrequency"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/medicationFrequency"
+        app:layout_constraintTop_toBottomOf="@+id/medicationFrequency" />
 
     <EditText
         android:id="@+id/medicationRefillAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="120dp"
         android:ems="10"
         android:hint="@string/medication_refills_remaining"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/previousRefillDate" />
+
+    <EditText
+        android:id="@+id/doctorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="120dp"
+        android:ems="10"
+        android:hint="Doctor Name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicationRefillAmount" />
 
     <Button
         android:id="@+id/expirationDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/medication_expiration"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
         android:onClick="selectAnExpirationDate"
-        app:layout_constraintEnd_toEndOf="@+id/medicationRefillAmount"
-        app:layout_constraintStart_toStartOf="@+id/medicationRefillAmount"
-        app:layout_constraintTop_toBottomOf="@+id/medicationRefillAmount" />
+        android:text="@string/medication_expiration"
+        app:layout_constraintEnd_toEndOf="@+id/doctorName"
+        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintStart_toStartOf="@+id/doctorName"
+        app:layout_constraintTop_toBottomOf="@+id/doctorName" />
 
     <Button
         android:id="@+id/addMedication"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="20dp"
-        android:onClick="addMedicationToScrollView"
+        android:layout_marginStart="2dp"
+        android:onClick="addMedication"
         android:text="@string/add_medication"
-        app:layout_constraintEnd_toStartOf="@+id/editMedications"
-        app:layout_constraintStart_toStartOf="@+id/medicationRefillAmount"
-        app:layout_constraintTop_toBottomOf="@+id/expirationDate" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/medicationRx"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/editMedications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="2dp"
         android:onClick="editActivity"
         android:text="@string/edit_medication"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/addMedication"
-        app:layout_constraintTop_toTopOf="@+id/addMedication" />
+        app:layout_constraintStart_toEndOf="@+id/medicationRx"
+        app:layout_constraintTop_toBottomOf="@+id/addMedication" />
 
     <TextView
         android:id="@+id/selectedDate"
@@ -143,11 +199,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="44dp"
         android:text="@string/displayed_prev_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/previousRefillDate"
         app:layout_constraintTop_toTopOf="@+id/previousRefillDate" />
+
+    <EditText
+        android:id="@+id/medicationFrequency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/medication_frequency"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/medicationQuantity"
+        app:layout_constraintStart_toStartOf="@+id/medicationQuantity"
+        app:layout_constraintTop_toBottomOf="@+id/medicationQuantity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

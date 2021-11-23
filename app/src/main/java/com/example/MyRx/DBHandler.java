@@ -4,9 +4,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import java.util.Date;
+
+// REFACTOR STATIC FINAL (CONSTANT) NEED TO BE IN ALL CAPS.
 
 public class DBHandler extends SQLiteOpenHelper {
+    private static final String TAG = "inDBHandler";
     // Creating database
     private static final String database_name = "myrxdb";
     // Initializing Database version
@@ -24,8 +29,10 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String firstname_col = "firstname";
     // lastName - third column of person table.
     private static final String lastname_col = "lastname";
+    private static DBHandler dbInstance;
     // DOB - final column of person table.
-    private static final String dob_col = "dateofbirth";
+    private final String dob_col = "dob";
+
 
     // Table 2: Medication Table
     // Fields:
@@ -33,6 +40,7 @@ public class DBHandler extends SQLiteOpenHelper {
         // Medication Name
         // Medication Dosage
         // Medication Current Quantity
+        // Medication Frequency
         // Previous Refill Date
         // Remaining Refills
         // Expiration Date
@@ -46,11 +54,13 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String dosage_col = "medicationdosage";
     // currentQuantity - fourth column of medication table.
     private static final String currentquantity_col = "currentquantity";
-    // previousRefillDate - fifth column of medication table.
+    // medicationFrequency - fifth column of medication table.
+    private static final String frequency_col = "frequency";
+    // previousRefillDate - sixth column of medication table.
     private static final String previousrefilldate_col = "previousrefilldate";
-    // remainingRefills - fifth column of medication table.
+    // remainingRefills - seventh column of medication table.
     private static final String remainingrefills_col = "remainingrefills";
-    // expirationDate - fifth column of medication table.
+    // expirationDate - eighth column of medication table.
     private static final String expirationdate_col = "expirationdate";
     // doctorName - final column of medication table.
     private static final String doctorname_col = "doctorname";
@@ -76,22 +86,30 @@ public class DBHandler extends SQLiteOpenHelper {
         super(context, database_name, null, database_version);
     }
 
+    public static DBHandler getInstance(Context context){
+        if (dbInstance == null){
+            dbInstance = new DBHandler(context);
+        }
+        return dbInstance;
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         String personQuery = "CREATE TABLE " + person_table + " ("
                 + id_col + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + firstname_col + " TEXT, "
                 + lastname_col + " TEXT, "
-                + dob_col + " TEXT) ";
+                + dob_col + " DATE) ";
 
         String medicationQuery = "CREATE TABLE " + medication_table + " ("
                 + medicationrx_col + " INTEGER PRIMARY KEY, "
                 + medicationname_col + " TEXT, "
                 + dosage_col + " TEXT, "
                 + currentquantity_col + " TEXT, "
-                + previousrefilldate_col + " TEXT, "
+                + frequency_col + "TEXT,"
+                + previousrefilldate_col + " DATE, "
                 + remainingrefills_col + " TEXT, "
-                + expirationdate_col + " TEXT, "
+                + expirationdate_col + " DATE, "
                 + doctorname_col + " TEXT) ";
 
         String notificationQuery = "CREATE TABLE " + notification_table + " ("
@@ -107,39 +125,49 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // calling a writable method to write to our database for adding a new person.
-    public void addNewPerson(String firstName, String lastName, String dob){
+    public long addNewPerson(String fName, String lName, String dob){
+//        Person p = new Person();
+//        p.setFirstName("Courtney");
+//        p.setLastName("Arrowood");
+        //Log.e(TAG, p.toString());
         SQLiteDatabase db = this.getWritableDatabase();
 
         // content values variable
         ContentValues personValues = new ContentValues();
-        personValues.put(firstname_col, firstName);
-        personValues.put(lastname_col, lastName);
+        personValues.put(firstname_col, fName);
+        personValues.put(lastname_col, lName);
         personValues.put(dob_col, dob);
 
         // inserting passed values into table.
-        db.insert(person_table, null, personValues);
+        long result = db.insert(person_table, null, personValues);
+
+        if (result == -1) {
+            Log.e(TAG, "Insertion to DB Failed.");
+        }
+        else {
+            Log.e(TAG, fName + " " + lName + " Inserted.");
+        }
 
         // closing database after adding to database.
         db.close();
+        return result;
     }
 
     // calling a writable method to write to our database for adding a new medication.
-    public void addNewMedication(Integer medicationRx, String medicationName, String dosage,
-                                 Integer currentQuantity, String previousRefillDate,
-                                 Integer remainingRefills, String expirationDate,
-                                 String doctorName) {
+    public void addNewMedication(Medication m) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         // content values variable
         ContentValues medicationValues = new ContentValues();
-        medicationValues.put(medicationrx_col, medicationRx);
-        medicationValues.put(medicationname_col, medicationName);
-        medicationValues.put(dosage_col, dosage);
-        medicationValues.put(currentquantity_col, currentQuantity);
-        medicationValues.put(previousrefilldate_col, previousRefillDate);
-        medicationValues.put(remainingrefills_col, remainingRefills);
-        medicationValues.put(expirationdate_col, expirationDate);
-        medicationValues.put(doctorname_col, doctorName);
+        medicationValues.put(medicationrx_col, m.getMedicationRxNumber());
+        medicationValues.put(medicationname_col, m.getMedicationName());
+        medicationValues.put(dosage_col, m.getMedicationDosage());
+        medicationValues.put(currentquantity_col, m.getMedicationCurrentQuantity());
+        medicationValues.put(frequency_col, m.getMedicationFrequency());
+        medicationValues.put(previousrefilldate_col, m.getPreviousRefillDate());
+        medicationValues.put(remainingrefills_col, m.getRemainingRefills());
+        medicationValues.put(expirationdate_col, m.getExpirationDate());
+        medicationValues.put(doctorname_col, m.getDoctorName());
 
         // inserting passed values into table.
         db.insert(medication_table, null, medicationValues);
@@ -149,14 +177,14 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // calling a writable method to write to our database for adding a new medication.
-    public void addNotification(Integer rxID, String medicationExpired, String refillsLow, String noRefills) {
+    public void addNotification(Notification n) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         // content values variable
         ContentValues notificationValues = new ContentValues();
-        notificationValues.put(medicationexpirednotif_col, medicationExpired);
-        notificationValues.put(refillslownotif_col, refillsLow);
-        notificationValues.put(norefills_col, noRefills);
+        notificationValues.put(medicationexpirednotif_col, n.getMedicationExpired());
+        notificationValues.put(refillslownotif_col, n.getRefillsLow());
+        notificationValues.put(norefills_col, n.getNoRefills());
 
         // inserting passed values into table.
         db.insert(notification_table, null, notificationValues);
