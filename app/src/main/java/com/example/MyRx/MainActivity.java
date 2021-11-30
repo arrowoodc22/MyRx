@@ -172,16 +172,19 @@ public class MainActivity extends AppCompatActivity {
 
         EditText mDosage = findViewById(R.id.medicationDosage);
         String dosSpinText = dosageSpinner.getSelectedItem().toString();
+        // concatenated dosage
         String dosage = mDosage + " " + dosSpinText;
         med1.setMedicationDosage(dosage);
 
         EditText mQuantity = findViewById(R.id.medicationQuantity);
         String quanSpinText = quantitySpinner.getSelectedItem().toString();
-        String quantity = mQuantity + " " + dosSpinText;
+        // concatenated quantity
+        String quantity = mQuantity + " " + quanSpinText;
         med1.setMedicationCurrentQuantity(quantity);
 
         EditText mFrequency = findViewById(R.id.medicationFrequency);
         String freqSpinText = frequencySpinner.getSelectedItem().toString();
+        // concatenated frequency
         String frequency = mFrequency + " " + freqSpinText;
         med1.setMedicationFrequency(frequency);
 
