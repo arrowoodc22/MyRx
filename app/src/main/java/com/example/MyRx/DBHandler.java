@@ -126,10 +126,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
     // calling a writable method to write to our database for adding a new person.
     public long addNewPerson(String fName, String lName, String dob){
-//        Person p = new Person();
-//        p.setFirstName("Courtney");
-//        p.setLastName("Arrowood");
-        //Log.e(TAG, p.toString());
         SQLiteDatabase db = this.getWritableDatabase();
 
         // content values variable
@@ -154,26 +150,37 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // calling a writable method to write to our database for adding a new medication.
-    public void addNewMedication(Medication m) {
+    public long addNewMedication(Long medRxNumber, String medName, String medDosage,
+                                 String medFrequency, String medQuantity, Integer medRemainingRefills,
+                                 String medPrevRefillDate, String medExpirationDate,
+                                 String medDoctorName) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         // content values variable
         ContentValues medicationValues = new ContentValues();
-        medicationValues.put(medicationrx_col, m.getMedicationRxNumber());
-        medicationValues.put(medicationname_col, m.getMedicationName());
-        medicationValues.put(dosage_col, m.getMedicationDosage());
-        medicationValues.put(currentquantity_col, m.getMedicationCurrentQuantity());
-        medicationValues.put(frequency_col, m.getMedicationFrequency());
-        medicationValues.put(previousrefilldate_col, m.getPreviousRefillDate());
-        medicationValues.put(remainingrefills_col, m.getRemainingRefills());
-        medicationValues.put(expirationdate_col, m.getExpirationDate());
-        medicationValues.put(doctorname_col, m.getDoctorName());
+        medicationValues.put(medicationrx_col, medRxNumber);
+        medicationValues.put(medicationname_col, medName);
+        medicationValues.put(dosage_col, medDosage);
+        medicationValues.put(frequency_col, medFrequency);
+        medicationValues.put(currentquantity_col, medQuantity);
+        medicationValues.put(remainingrefills_col, medRemainingRefills);
+        medicationValues.put(previousrefilldate_col, medPrevRefillDate);
+        medicationValues.put(expirationdate_col, medExpirationDate);
+        medicationValues.put(doctorname_col, medDoctorName);
 
         // inserting passed values into table.
-        db.insert(medication_table, null, medicationValues);
+        long medResult = db.insert(medication_table, null, medicationValues);
+
+        if (medResult == -1) {
+            Log.e(TAG, "Medication Insertion to DB Failed.");
+        }
+        else {
+            Log.e(TAG, "Medication: " + medName + " Inserted.");
+        }
 
         // closing database after adding to database.
         db.close();
+        return medResult;
     }
 
     // calling a writable method to write to our database for adding a new medication.

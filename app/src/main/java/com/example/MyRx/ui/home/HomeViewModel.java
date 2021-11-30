@@ -11,11 +11,11 @@ import com.example.MyRx.R;
 public class HomeViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
-    private MutableLiveData<String> sText; // Text of scrollView
+    private MutableLiveData<String> sText;
 
     public HomeViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Hello, new user! Your prescriptions are listed below.");
+        mText.setValue("Hello, Courtney! Your prescriptions are listed below.");
 
         sText = new MutableLiveData<>();
         sText.setValue("Here will be your listed prescriptions.");

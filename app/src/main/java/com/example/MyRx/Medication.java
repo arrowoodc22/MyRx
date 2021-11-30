@@ -26,7 +26,6 @@ public class Medication {
 
     // make getter & setter for each field.
     // after make a TextView to display information.
-    Medication medication = new Medication();
 
     // Setters
     public void setMedicationRxNumber(Long RxNum) {

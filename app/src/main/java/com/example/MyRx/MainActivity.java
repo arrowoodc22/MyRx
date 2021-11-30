@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.example.MyRx.ui.home.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -71,57 +73,6 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
-    // Function to allow medications to be taken from
-    // AddActivity & shows/formatted in Home Page.
-    public void addMedication(View view) {
-        EditText mName = findViewById(R.id.medicationName);
-        mName.getText();
-        EditText mDosage = findViewById(R.id.medicationDosage);
-        mDosage.getText();
-        EditText mQuantity = findViewById(R.id.medicationQuantity);
-        mQuantity.getText();
-
-        // dosageSpinner located in AddActivity
-        dosageSpinner = findViewById(R.id.spinnerDosage);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.dosage_type, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        dosageSpinner.setAdapter(adapter);
-
-        // quantitySpinner located in AddActivity
-        quantitySpinner = findViewById(R.id.spinnerQuantity);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> quantityAdapter = ArrayAdapter.createFromResource(this,
-                R.array.quantity_type, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        quantityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        quantitySpinner.setAdapter(quantityAdapter);
-
-        // frequencySpinner located in AddActivity
-        frequencySpinner = findViewById(R.id.spinnerFrequency);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> frequencyAdapter = ArrayAdapter.createFromResource(this,
-                R.array.frequency_type, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        frequencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        frequencySpinner.setAdapter(frequencyAdapter);
-
-        addMedicationButton = findViewById(R.id.addMedication);
-        addMedicationButton.setOnClickListener(viewMed -> {
-            addMedicationToHomePage();
-            //addMedicationToDatabase();
-        });
-    }
-
-    private void addMedicationToHomePage() {
-        ;
-    }
-
     // On Click for Manage Fragment that allows Add Person Button to
     // launch New AddPerson Activity when clicked.
     public void addActivity(View view) {
@@ -180,5 +131,77 @@ public class MainActivity extends AppCompatActivity {
         String year_string = Integer.toString(year);
         String dateMessage = (" " + month_string + "/" + day_string + "/" + year_string);
         dateTextView.setText(dateMessage);
+    }
+
+    public void addMedication(View view) {
+        // dosageSpinner located in AddActivity
+        dosageSpinner = findViewById(R.id.spinnerDosage);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.dosage_type, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        dosageSpinner.setAdapter(adapter);
+
+        // quantitySpinner located in AddActivity
+        quantitySpinner = findViewById(R.id.spinnerQuantity);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> quantityAdapter = ArrayAdapter.createFromResource(this,
+                R.array.quantity_type, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        quantityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        quantitySpinner.setAdapter(quantityAdapter);
+
+        // frequencySpinner located in AddActivity
+        frequencySpinner = findViewById(R.id.spinnerFrequency);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> frequencyAdapter = ArrayAdapter.createFromResource(this,
+                R.array.frequency_type, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        frequencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        frequencySpinner.setAdapter(frequencyAdapter);
+
+        Medication med1 = new Medication();
+        EditText mRxNumber = findViewById(R.id.medicationRx);
+        med1.setMedicationRxNumber(Long.valueOf(mRxNumber.getText().toString()));
+        EditText mName = findViewById(R.id.medicationName);
+        med1.setMedicationName(mName.getText().toString());
+
+        EditText mDosage = findViewById(R.id.medicationDosage);
+        String dosSpinText = dosageSpinner.getSelectedItem().toString();
+        String dosage = mDosage + " " + dosSpinText;
+        med1.setMedicationDosage(dosage);
+
+        EditText mQuantity = findViewById(R.id.medicationQuantity);
+        String quanSpinText = quantitySpinner.getSelectedItem().toString();
+        String quantity = mQuantity + " " + dosSpinText;
+        med1.setMedicationCurrentQuantity(quantity);
+
+        EditText mFrequency = findViewById(R.id.medicationFrequency);
+        String freqSpinText = frequencySpinner.getSelectedItem().toString();
+        String frequency = mFrequency + " " + freqSpinText;
+        med1.setMedicationFrequency(frequency);
+
+        EditText mRemainingRefills = findViewById(R.id.medicationRefillAmount);
+        med1.setRemainingRefills(Integer.valueOf(mRemainingRefills.getText().toString()));
+        TextView mPrevRefillDate = findViewById(R.id.selectedRefillDate);
+        med1.setPreviousRefillDate(mPrevRefillDate.getText().toString());
+        TextView mExpirationDate = findViewById(R.id.expirationDate);
+        med1.setExpirationDate(mExpirationDate.getText().toString());
+        EditText mDoctorName = findViewById(R.id.doctorName);
+        med1.setDoctorName(mDoctorName.getText().toString());
+        dbHandler.addNewMedication(med1.getMedicationRxNumber(), med1.getMedicationName(),
+                med1.getMedicationDosage(), med1.getMedicationFrequency(),
+                med1.getMedicationCurrentQuantity(), med1.getRemainingRefills(),
+                med1.getPreviousRefillDate(), med1.getExpirationDate(), med1.getDoctorName());
+        returnToHome();
+    }
+
+    public void returnToHome() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
