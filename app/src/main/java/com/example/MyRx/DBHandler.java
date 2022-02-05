@@ -183,27 +183,16 @@ public class DBHandler extends SQLiteOpenHelper {
         return medResult;
     }
 
-    // calling a writable method to write to our database for adding a new medication.
-    public void addNotification(Notification n) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        // content values variable
-        ContentValues notificationValues = new ContentValues();
-        notificationValues.put(medicationexpirednotif_col, n.getMedicationExpired());
-        notificationValues.put(refillslownotif_col, n.getRefillsLow());
-        notificationValues.put(norefills_col, n.getNoRefills());
-
-        // inserting passed values into table.
-        db.insert(notification_table, null, notificationValues);
-
-        // closing database after adding to database.
-        db.close();
-    }
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // this method is called to check if the table exists already.
         db.execSQL("DROP TABLE IF EXISTS " + person_table + medication_table + notification_table);
         onCreate(db);
+    }
+
+    long addMedicationToDatabase(Medication medication) {
+        return addNewMedication(medication.getMedicationRxNumber(), medication.getMedicationName(), medication.getMedicationDosage(),
+                medication.getMedicationFrequency(),medication.getMedicationCurrentQuantity(), medication.getRemainingRefills(),
+                medication.getPreviousRefillDate(), medication.getExpirationDate(), medication.getDoctorName());
     }
 }

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.MyRx.DBHandler;
 import com.example.MyRx.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {

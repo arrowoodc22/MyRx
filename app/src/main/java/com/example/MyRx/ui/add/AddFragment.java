@@ -6,12 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-
-import com.example.MyRx.MainActivity;
 import com.example.MyRx.R;
 import com.example.MyRx.databinding.FragmentAddBinding;
 
@@ -19,6 +16,9 @@ public class AddFragment extends Fragment {
 
     private AddViewModel searchViewModel;
     private FragmentAddBinding binding;
+    Spinner dosageSpinner;
+    Spinner quantitySpinner;
+    Spinner frequencySpinner;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -27,14 +27,31 @@ public class AddFragment extends Fragment {
 
         binding = FragmentAddBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-//        searchViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-
-//            }
-//        });
+        initializeDosageSpinner(root);
+        initializeFrequencySpinner(root);
+        initializeQuantitySpinner(root);
         return root;
+    }
+
+    public void initializeDosageSpinner(View view) {
+        dosageSpinner = view.findViewById(R.id.spinnerDosage);
+        ArrayAdapter<CharSequence> dosageAdapter = ArrayAdapter.createFromResource(view.getContext(), R.array.dosage_type, android.R.layout.simple_spinner_item);
+        dosageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dosageSpinner.setAdapter(dosageAdapter);
+    }
+
+    public void initializeFrequencySpinner(View view) {
+        frequencySpinner = view.findViewById(R.id.spinnerFrequency);
+        ArrayAdapter<CharSequence> frequencyAdapter = ArrayAdapter.createFromResource(view.getContext(), R.array.frequency_type, android.R.layout.simple_spinner_item);
+        frequencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        frequencySpinner.setAdapter(frequencyAdapter);
+    }
+
+    public void initializeQuantitySpinner(View view) {
+        quantitySpinner = view.findViewById(R.id.spinnerQuantity);
+        ArrayAdapter<CharSequence> quantityAdapter = ArrayAdapter.createFromResource(view.getContext(), R.array.quantity_type, android.R.layout.simple_spinner_item);
+        quantityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        quantitySpinner.setAdapter(quantityAdapter);
     }
 
     @Override
