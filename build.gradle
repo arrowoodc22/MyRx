@@ -21,9 +21,11 @@ ext {
     navigationVersion = '2.3.5'
     roomVersion = '2.4.1'
     // testing
-    junitversion = '4.+'
+    junitVersion = '4.13.2'
+    coreTestingVersion = '2.1.0'
+    testRunnerVersion = '1.4.0'
+    testJunitVersion = '1.1.3'
     expressoVersion = '3.4.0'
-    androidxJunitVersion = '1.1.3'
 }
 
 task clean(type: Delete) {

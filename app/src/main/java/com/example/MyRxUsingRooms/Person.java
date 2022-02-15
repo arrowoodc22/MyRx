@@ -1,4 +1,11 @@
+/*
+    Person class
+        Used to represent persons with prescriptions in the app; matches
+        entities in persontable in MyRxDatabase.
+ */
+
 package com.example.MyRxUsingRooms;
+
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;

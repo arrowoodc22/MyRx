@@ -13,8 +13,8 @@ public interface PersonDao {
     @Query("Select * FROM persontable ")
     LiveData<List<Person>> getAllPersons();
 
-    //@Query("Select ID FROM persontable WHERE firstName = :fname")
-    //Person getOnePerson(String fname);
+    @Query("Select * FROM persontable WHERE firstName = :firstName")
+    Person getOnePerson(String firstName);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Person p);

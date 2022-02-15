@@ -9,7 +9,6 @@ import java.util.List;
 public class MyRxRepository {
     //Holds info from queries
     private PersonDao personDao;
-    private Person person;
     private LiveData<List<Person>> allPersons;
 
     MyRxRepository(Application application) {
@@ -23,9 +22,9 @@ public class MyRxRepository {
         return allPersons;
     }
 
-    //Person getOnePerson(String fname) {
-    //    return
-    //}
+    Person getOnePerson(String firstName) {
+        return personDao.getOnePerson(firstName);
+    }
 
     void insertPerson(Person p) {
         MyRxDatabase.databaseWriteExecutor.execute(() -> {personDao.insert(p);

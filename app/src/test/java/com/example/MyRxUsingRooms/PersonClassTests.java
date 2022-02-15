@@ -14,7 +14,7 @@ public class PersonClassTests {
     @Test
     public void newPerson_Created() {
         Person testP = new Person(123456, "Boogie", "Arrowood", "");
-
+        assertEquals(123456, testP.getPersonID());
         assertEquals("Boogie", testP.getFirstName());
         assertEquals("Arrowood", testP.getLastName());
     }
