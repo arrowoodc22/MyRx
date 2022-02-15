@@ -1,3 +1,8 @@
+/*
+    MyRxDatabase class
+        Used to create the database for this project.
+ */
+
 package com.example.MyRxUsingRooms;
 
 import android.content.Context;

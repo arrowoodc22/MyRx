@@ -1,17 +1,11 @@
+/*
+    Medication class
+        Used to represent required information for the medications a person wants to enter.
+ */
+
 package com.example.MyRxUsingRooms;
 
 public class Medication {
-    // Table 2: Medication Table
-    // Fields:
-    // Rx Number
-    // Medication Name
-    // Medication Dosage
-    // Medication Frequency
-    // Medication Current Quantity
-    // Previous Refill Date
-    // Remaining Refills
-    // Expiration Date
-    // Doctor Name
     Long rxNumber;
     String medicationName;
     String medicationDosage;
@@ -21,9 +15,6 @@ public class Medication {
     String previousRefillDate;
     String expirationDate;
     String doctorName;
-
-    // make getter & setter for each field.
-    // after make a TextView to display information.
 
     // Setters
     public void setMedicationRxNumber(Long RxNum) {

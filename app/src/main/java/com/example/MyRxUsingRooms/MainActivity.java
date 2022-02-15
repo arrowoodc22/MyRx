@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private MyRxViewModel myRxViewModel;
     public static final int NEW_PERSON_ACTIVITY_REQUEST_CODE = 10;
 
-    // Person p1 = new Person(id, fName, lName, dob);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +46,6 @@ public class MainActivity extends AppCompatActivity {
         myRxViewModel = new ViewModelProvider(this).get(MyRxViewModel.class);
     }
 
-    // On Click for Manage Fragment that allows Add Person Button to
-    // launch New AddPerson Activity when clicked.
     public void addActivity(View view) {
         addPersonButton = findViewById(R.id.addPerson);
         addPersonButton.setOnClickListener(view1 -> {
@@ -57,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // On Click for Manage Fragment that allows Manage Person Button to
-    // launch New ManagePersonActivity when clicked.
     public void manageActivity(View view) {
         manageButton = findViewById(R.id.managePerson);
         manageButton.setOnClickListener(view1 -> {
@@ -67,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // On Click Listener for Edit Medications ( in AddActivity ) button allows button to
-    // launch EditMedications when clicked.
     public void editActivity(View view) {
         editButton = findViewById(R.id.editMedications);
         editButton.setOnClickListener(view1 -> {

@@ -1,8 +1,12 @@
+/*
+    AddPersonActivity class
+        Used to allow a user to add a person to their app.
+ */
+
 package com.example.MyRxUsingRooms;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,13 +17,10 @@ import androidx.fragment.app.DialogFragment;
 import java.util.Random;
 
 public class AddPersonActivity extends AppCompatActivity {
-//    private DBHandler dbHandler;
     private static final String TAG = "inAddPersonActivity";
     private static final int UPPERBOUND = 10000;
     private static final int FROMADDPERSON = 10;
 
-    // Created Add Person Class to allow user to Add Person to Home Page.
-    // This page will allow ask user to input First Name, Last Name,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,30 +28,22 @@ public class AddPersonActivity extends AppCompatActivity {
         // Added a Back Button.
         getSupportActionBar().setTitle("Add Person");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // dbHandler = DBHandler.getInstance(getApplicationContext());
+
     }
 
     public void addPerson(View view) {
-        // Insert code to be able to access AddPersonActivity information
-        Log.d(TAG, "Starting addPerson");
 
-        //dbHandler.addNewPerson(p1.getFirstName(), p1.getLastName(), p1.getDOB());
         Random rand = new Random();
         int id = rand.nextInt(UPPERBOUND);
 
         EditText first = findViewById(R.id.firstName);
         String fName = first.getText().toString();
-        Log.d(TAG, "First name is: " + fName);
 
         EditText last = findViewById(R.id.lastName);
         String lName = last.getText().toString();
-        Log.d(TAG, "Last name is: " + lName);
 
         TextView dobText = findViewById(R.id.selectedBirthDate);
         String dob = dobText.toString();
-        Log.d(TAG, "DOB is: " + dob);
-        Log.d(TAG, "Created new person");
-        Log.d(TAG, "Adding person to database");
 
         // Creating intent
         Intent intent = new Intent(AddPersonActivity.this, MainActivity.class);

@@ -1,3 +1,8 @@
+/*
+    PersonDAO class
+        Used to make queries for the Room Database aka MyRxDatabase.
+ */
+
 package com.example.MyRxUsingRooms;
 
 import androidx.lifecycle.LiveData;

@@ -1,7 +1,14 @@
+/*
+    Edit class
+        Used to allow a user to edit existing medications information if
+        information has changed.
+ */
+
 package com.example.MyRxUsingRooms;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class EditActivity extends AppCompatActivity {
 

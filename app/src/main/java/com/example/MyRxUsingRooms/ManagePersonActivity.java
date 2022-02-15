@@ -1,8 +1,13 @@
+/*
+    ManagePerson class
+        Used to let a person manage added persons to their app.
+ */
+
 package com.example.MyRxUsingRooms;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ManagePersonActivity extends AppCompatActivity {
 

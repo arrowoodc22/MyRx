@@ -1,3 +1,8 @@
+/*
+    MyRxRepository class
+        Used to hold information for queries to the database.
+ */
+
 package com.example.MyRxUsingRooms;
 
 import android.app.Application;
@@ -7,7 +12,6 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 public class MyRxRepository {
-    //Holds info from queries
     private PersonDao personDao;
     private LiveData<List<Person>> allPersons;
 

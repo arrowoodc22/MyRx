@@ -1,3 +1,8 @@
+/*
+    MyRxViewModel
+        Used to set up the viewModel & functions for the MyRxRepository.
+ */
+
 package com.example.MyRxUsingRooms;
 
 import android.app.Application;
